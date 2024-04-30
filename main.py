@@ -17,7 +17,7 @@ df = preprocess_data(spark, data_path)
 
 
 # Train KMeans model
-kmeans = KMeans().setK(4).setSeed(1)
+kmeans = KMeans().setK(5).setSeed(1)
 model = kmeans.fit(df)
 
 # Make predictions
