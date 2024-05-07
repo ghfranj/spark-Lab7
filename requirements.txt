@@ -4,3 +4,4 @@ pandas
 #pymongo>=2.4
 bson
 matplotlib
+configparser

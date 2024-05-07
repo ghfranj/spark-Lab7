@@ -2,19 +2,15 @@ import findspark
 findspark.init('C:\SPARK')
 from pyspark.sql import SparkSession
 from pyspark.ml.clustering import KMeans
-from pyspark.ml.feature import VectorAssembler, StringIndexer
 from pyspark.ml.evaluation import ClusteringEvaluator
-from preprocess_data import preprocess_data
+from src.preprocess_data import preprocess_data
+from src.MySpark import MySpark
 # Initialize SparkSession
-spark = SparkSession.builder \
-    .appName("Clustering Model with PySpark") \
-    .config("spark.executor.memory", "4g") \
-    .config("spark.driver.memory", "4g") \
-    .getOrCreate()
+mySpark = MySpark('config.ini')
+spark = mySpark.get_spark_session()
 # Read the data
 data_path = "E:/Downloads/en.openfoodfacts.org.products.csv/en.openfoodfacts.org.products.csv"
 df = preprocess_data(spark, data_path)
-
 
 # Train KMeans model
 kmeans = KMeans().setK(5).setSeed(1)
