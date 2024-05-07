@@ -5,10 +5,10 @@ from pyspark.ml.clustering import KMeans
 from pyspark.ml.evaluation import ClusteringEvaluator
 from src.preprocess_data import preprocess_data
 from src.MySpark import MySpark
-# Initialize SparkSession
+
 mySpark = MySpark('config.ini')
 spark = mySpark.get_spark_session()
-# Read the data
+
 data_path = "E:/Downloads/en.openfoodfacts.org.products.csv/en.openfoodfacts.org.products.csv"
 df = preprocess_data(spark, data_path)
 
