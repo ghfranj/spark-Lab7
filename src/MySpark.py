@@ -19,8 +19,13 @@ class MySpark:
 
         for key, value in self.config.get('spark_configs', {}).items():
             spark_builder.config(key, value)
+        # spark_builder.config("spark.jars", "ojdbc8.jar")
+        # spark_builder.config("spark.driver.extraClassPath", "ojdbc8.jar")
+        # spark_builder.config("spark.executor.extraClassPath", "ojdbc8.jar")
 
         self.spark = spark_builder.getOrCreate()
 
+
     def get_spark_session(self):
+        self.spark.catalog.clearCache()
         return self.spark
