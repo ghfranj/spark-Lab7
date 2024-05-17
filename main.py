@@ -33,6 +33,7 @@ if __name__ == '__main__':
     # Unload DataFrame data from Spark
     spark.catalog.clearCache()
 
+
     # Read data again from Oracle using JDBC
     df_from_oracle = spark.read.format("jdbc").options(
         url='jdbc:oracle:thin:@oracle-db:1521/ORCLPDB1',
@@ -63,7 +64,7 @@ if __name__ == '__main__':
     wssse = evaluator.evaluate(predictions)
 
     print("Within Set Sum of Squared Errors = " + str(wssse))
-    # Show the result
+
     centers = model.clusterCenters()
     print("Cluster Centers:")
     for center in centers:
