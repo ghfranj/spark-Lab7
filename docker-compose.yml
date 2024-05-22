@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  oracle-db:
+  data_source:
     image: container-registry.oracle.com/database/enterprise:21.3.0.0
     container_name: oracle
     environment:
@@ -18,8 +18,10 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    networks:
+      - mynetwork
 
-  spark:
+  model:
     image: bitnami/spark:latest
     container_name: spark_container
     build:
@@ -29,6 +31,24 @@ services:
       - "4040:4040"  # Spark UI
     environment:
       - SPARK_MODE=master
+    networks:
+      - mynetwork
+
+  datamart:
+    build:
+      context: datamart/.
+      dockerfile: Dockerfile
+    container_name: datamart
+    ports:
+      - "8080:8080"  # Expose API for querying
+    networks:
+      - mynetwork
+#    depends_on:
+#      - data_source
+#      - model
+
+networks:
+  mynetwork:
 
 volumes:
   oracle-data:
