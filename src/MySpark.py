@@ -1,5 +1,5 @@
-import findspark
-findspark.init('C:\SPARK')
+# import findspark
+# findspark.init('C:\SPARK')
 from pyspark.sql import SparkSession
 import json
 import configparser
