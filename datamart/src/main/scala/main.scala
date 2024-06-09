@@ -9,7 +9,7 @@ object Main {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder()
                             .appName("DataPreprocessor")
-                            .master("local[*]") // Change this to your master URL if needed
+                            .master("local[*]")
                             .getOrCreate()
 
     val filePath = "data/en.openfoodfacts.org.products.csv" // CSV file path
